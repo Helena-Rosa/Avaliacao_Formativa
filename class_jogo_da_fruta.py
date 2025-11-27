@@ -59,10 +59,31 @@ class SorteioDeFrutas:
                                         font=("Arial" , 15))
         label_jogadas.pack()
 
+       
+        tree_frame = ttk.Frame(self.janela)
+        tree_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
+        scrollbar = ttk.Scrollbar(tree_frame, orient="vertical")
+        scrollbar.pack(side="right", fill="y")
 
-        self.treeview = ttk.Treeview(self.janela)
-        self.treeview.pack(padx=15, pady=20, fill="both", expand=True)
+        # Definição das colunas (ATUALIZADO)
+        cols = ('resultado') # Colunas super simplificadas
+        self.tree = ttk.Treeview(tree_frame, 
+                                 columns=cols, 
+                                 show='headings', 
+                                 bootstyle="INFO",
+                                 yscrollcommand=scrollbar.set)
+        
+        scrollbar.config(command=self.tree.yview)
+
+        # Configurando os Cabeçalhos (ATUALIZADO)
+
+        self.tree.heading('resultado', text='Resultado da Jogada')
+
+        # Configurando a largura das colunas (ATUALIZADO)
+        self.tree.column('resultado', width=450, anchor="center") # Campo principal
+
+        self.tree.pack(fill="both", expand=True)
 
 
 
